@@ -35,7 +35,7 @@ jobs:
         cd zlog
         make PREFIX=$PWD/build
         make PREFIX=$PWD/build install
-        tree build
+        ls -lh build/{bin,include,lib}
 
     - name: Build [${{ github.repository }}]
       run: |
