@@ -42,8 +42,8 @@ make
 
 ```shell
 $ ./spdlog-vs-zlog
-[2023-08-14 21:36:56.360] [info] logger: spdlog, iterations: 100,000, threads: 10, elapsed: 0.12 secs, logs/sec: 839,550/sec
-[2023-08-14 21:36:56.574] [info] logger:   zlog, iterations: 100,000, threads: 10, elapsed: 0.21 secs, logs/sec: 468,513/sec
+[2023-08-14 21:43:36.878] [info] spdlog, elapsed: 0.12 secs, logs/sec: 830,431/sec
+[2023-08-14 21:43:37.094] [info]   zlog, elapsed: 0.22 secs, logs/sec: 463,186/sec
 ```
 
 ## License
