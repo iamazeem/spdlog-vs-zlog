@@ -24,19 +24,20 @@ jobs:
         shell: bash
 
     steps:
-    - name: Checkout on tag/release
+    - name: Checkout [${{ github.repository }}]
       uses: actions/checkout@v3
       with:
         ref: main
         submodules: true
 
-    - name: Build zlog
+    - name: Build zlog submodule
       run: |
         cd zlog
         make PREFIX=$PWD/build
         make PREFIX=$PWD/build install
+        tree build
 
-    - name: Build
+    - name: Build [${{ github.repository }}]
       run: |
         mkdir build
         cd build
