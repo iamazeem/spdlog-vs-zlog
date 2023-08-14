@@ -41,7 +41,7 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
     const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "spdlog, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
+                                         "spdlog, elapsed: {:0.2f} secs, logs/sec: {:>10L}/sec",
                                          delta_d, int(iterations / delta_d)));
     spdlog::drop(logger->name());
 }
@@ -80,7 +80,7 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "  zlog, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
+                                         "  zlog, elapsed: {:0.2f} secs, logs/sec: {:>10L}/sec",
                                          delta_d, int(iterations / delta_d)));
 
     zlog_fini();
