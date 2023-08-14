@@ -12,6 +12,40 @@ spdlog vs zlog benchmarks
 - Rotation: 30 MB (5 files)
 - Optimization Level: `O3`
 
+## Setup
+
+Clone:
+
+```shell
+git clone --recursive git@github.com:iamazeem/spdlog-vs-zlog.git
+cd spdlog-vs-zlog
+```
+
+Build `zlog` :
+
+```shell
+cd zlog
+make PREFIX=$PWD/build
+make PREFIX=$PWD/build install
+cd ..
+```
+
+## Build
+
+```shell
+mkdir build && cd build
+cmake ..
+make
+```
+
+## Run
+
+```shell
+$ ./spdlog-vs-zlog
+[2023-08-14 21:36:56.360] [info] logger: spdlog, iterations: 100,000, threads: 10, elapsed: 0.12 secs, logs/sec: 839,550/sec
+[2023-08-14 21:36:56.574] [info] logger:   zlog, iterations: 100,000, threads: 10, elapsed: 0.21 secs, logs/sec: 468,513/sec
+```
+
 ## License
 
 [MIT](LICENSE)
