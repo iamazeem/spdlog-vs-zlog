@@ -41,8 +41,8 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
     const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "logger: spdlog, iterations: {:>L}, threads: {}, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
-                                         iterations, thread_count, delta_d, int(iterations / delta_d)));
+                                         "spdlog, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
+                                         delta_d, int(iterations / delta_d)));
     spdlog::drop(logger->name());
 }
 
@@ -80,8 +80,8 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "logger:   zlog, iterations: {:>L}, threads: {}, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
-                                         iterations, thread_count, delta_d, int(iterations / delta_d)));
+                                         "  zlog, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
+                                         delta_d, int(iterations / delta_d)));
 
     zlog_fini();
 }
@@ -106,7 +106,7 @@ int main(int argc, char **argv)
         }
         if (thread_count > max_threads)
         {
-            throw std::runtime_error(spdlog::fmt_lib::format("Number of threads exceeds maximum [{}]", max_threads));
+            throw std::runtime_error(spdlog::fmt_lib::format("number of threads exceeds maximum [{}]", max_threads));
         }
 
         bench_spdlog(iterations, thread_count);
