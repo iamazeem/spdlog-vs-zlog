@@ -1,0 +1,47 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+    - '**.md'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+    - '**.md'
+  workflow_dispatch:
+
+jobs:
+  ci:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout on tag/release
+      uses: actions/checkout@v3
+      with:
+        ref: main
+        submodules: true
+
+    - name: Build zlog
+      run: |
+        cd zlog
+        make PREFIX=$PWD/build
+        make PREFIX=$PWD/build install
+
+    - name: Build
+      run: |
+        mkdir build && cd build
+        cmake ..
+        make
+
+    - name: Run
+      run: |
+        ./spdlog-vs-zlog
