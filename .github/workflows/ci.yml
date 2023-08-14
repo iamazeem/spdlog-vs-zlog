@@ -15,7 +15,7 @@ jobs:
   ci:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest, windows-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -46,6 +46,9 @@ jobs:
 
     - name: Run
       run: |
+        if [[ ${{ matrix.os }} == 'windows-latest' ]]; then
+          cp WinZlog/Release/bin/*.dll ./build/
+        fi
         cd build
         echo '```shell' >> "$GITHUB_STEP_SUMMARY"
         ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"

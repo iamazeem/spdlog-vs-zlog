@@ -18,7 +18,13 @@ set(SOURCES
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${PROJECT_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/lib/libzlog.a
-    -pthread
-)
+if (WIN32)
+    target_link_libraries(${PROJECT_NAME}
+        ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/lib/zlog.lib
+    )
+else()
+    target_link_libraries(${PROJECT_NAME}
+        ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/lib/libzlog.a
+        -pthread
+    )
+endif (WIN32)
