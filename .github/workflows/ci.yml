@@ -31,7 +31,8 @@ jobs:
         ref: main
         submodules: true
 
-    - name: Build zlog submodule
+    - name: Build zlog submodule for Linux and macOS
+      if: ${{ runner.os != 'Windows' }}
       run: |
         cd zlog
         make PREFIX=$PWD/build
@@ -47,7 +48,7 @@ jobs:
 
     - name: Run
       run: |
-        if [[ ${{ matrix.os }} == 'windows-latest' ]]; then
+        if [[ ${{ runner.os }} == 'Windows' ]]; then
           cp WinZlog/Release/bin/*.dll ./build/
         fi
         cd build
