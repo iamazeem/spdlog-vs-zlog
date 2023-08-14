@@ -45,9 +45,9 @@ make
 ## Run
 
 ```shell
-$ ./spdlog-vs-zlog
-[2023-08-14 21:43:36.878] [info] spdlog, elapsed: 0.12 secs, logs/sec: 830,431/sec
-[2023-08-14 21:43:37.094] [info]   zlog, elapsed: 0.22 secs, logs/sec: 463,186/sec
+$ ./spdlog-vs-zlog 
+[2023-08-14 23:07:23.127] [info] spdlog, elapsed: 0.08 secs, logs/sec:  1,224,619/sec
+[2023-08-14 23:07:23.281] [info]   zlog, elapsed: 0.15 secs, logs/sec:    648,189/sec
 ```
 
 ## License
