@@ -1,5 +1,5 @@
 {
-  "cSpell.words": ["spdlog"],
+  "cSpell.words": ["dzlog", "spdlog", "zlog"],
   "files.associations": {
     "*.json": "json",
     "cctype": "cpp",
