@@ -15,6 +15,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 
 if (WIN32)
     include_directories(
+        ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
         ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/head
     )
     target_link_libraries(${PROJECT_NAME}
