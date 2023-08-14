@@ -46,4 +46,6 @@ jobs:
     - name: Run
       run: |
         cd build
+        echo '```shell' >> "$GITHUB_STEP_SUMMARY"
         ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
+        echo '```' >> "$GITHUB_STEP_SUMMARY"
