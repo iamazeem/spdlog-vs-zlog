@@ -44,6 +44,7 @@ jobs:
         mkdir build
         cd build
         cmake ..
+        ls -lh
         make
 
     - name: Run
