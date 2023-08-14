@@ -22,12 +22,14 @@ void bench_mt(const std::shared_ptr<spdlog::logger> logger, const std::size_t it
     const auto start = high_resolution_clock::now();
     for (size_t t = 0; t < thread_count; ++t)
     {
-        threads.emplace_back([&]()
-                             {
-            for (std::size_t i = 0; i < iterations / thread_count; i++)
+        threads.emplace_back(
+            [&]()
             {
-                logger->info("Hello logger: msg number {}", i);
-            } });
+                for (std::size_t i = 1; i <= (iterations / thread_count); i++)
+                {
+                    logger->info("Hello logger: msg number {}", i);
+                }
+            });
     }
 
     for (auto &t : threads)
