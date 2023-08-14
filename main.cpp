@@ -7,23 +7,19 @@
 
 #include "zlog.h"
 
-using std::chrono::duration;
-using std::chrono::duration_cast;
-using std::chrono::high_resolution_clock;
-
-static constexpr std::size_t file_size = 30 * 1024 * 1024;
-static constexpr std::size_t rotating_files = 5;
+static constexpr std::size_t max_file_size = 30 * 1024 * 1024;
+static constexpr std::size_t max_rotating_files = 5;
 static constexpr std::size_t max_threads = 1000;
 
 void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) noexcept
 {
-    auto logger = spdlog::rotating_logger_mt("rotating_mt", "logs/spdlog.log", file_size, rotating_files);
-    logger->set_pattern("%Y-%m-%d %T.%o %l [%P:%t] %v");
+    auto logger = spdlog::rotating_logger_mt("rotating_mt", "/tmp/spdlog.log", max_file_size, max_rotating_files);
+    logger->set_pattern("%Y-%m-%d %T.%e %l [%P:%t] %v");
 
     std::vector<std::thread> threads;
     threads.reserve(thread_count);
 
-    const auto start = high_resolution_clock::now();
+    const auto start = std::chrono::high_resolution_clock::now();
     for (size_t t = 0; t < thread_count; ++t)
     {
         threads.emplace_back(
@@ -31,7 +27,7 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
             {
                 for (std::size_t i = 1; i <= (iterations / thread_count); i++)
                 {
-                    logger->info("Testing spdlog: msg number {}", i);
+                    logger->info("message number # {}", i);
                 }
             });
     }
@@ -41,8 +37,8 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
         t.join();
     };
 
-    const auto delta = high_resolution_clock::now() - start;
-    const auto delta_d = duration_cast<duration<double>>(delta).count();
+    const auto delta = std::chrono::high_resolution_clock::now() - start;
+    const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
                                          "logger: spdlog, iterations: {:>L}, threads: {}, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
@@ -62,7 +58,7 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     std::vector<std::thread> threads;
     threads.reserve(thread_count);
 
-    const auto start = high_resolution_clock::now();
+    const auto start = std::chrono::high_resolution_clock::now();
     for (size_t t = 0; t < thread_count; ++t)
     {
         threads.emplace_back(
@@ -70,7 +66,7 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
             {
                 for (std::size_t i = 1; i <= (iterations / thread_count); i++)
                 {
-                    dzlog_info("Testing zlog: msg number %zu", i);
+                    dzlog_info("message number # %zu", i);
                 }
             });
     }
@@ -80,14 +76,13 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
         t.join();
     };
 
-    const auto delta = high_resolution_clock::now() - start;
-    const auto delta_d = duration_cast<duration<double>>(delta).count();
+    const auto delta = std::chrono::high_resolution_clock::now() - start;
+    const auto delta_d = std::chrono::duration_cast<std::chrono::duration<double>>(delta).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "logger: zlog, iterations: {:>L}, threads: {}, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
+                                         "logger:   zlog, iterations: {:>L}, threads: {}, elapsed: {:0.2f} secs, logs/sec: {:>L}/sec",
                                          iterations, thread_count, delta_d, int(iterations / delta_d)));
 
-    zlog_profile();
     zlog_fini();
 }
 
@@ -98,6 +93,7 @@ int main(int argc, char **argv)
 
     std::size_t iterations = 100'000;
     std::size_t thread_count = 10;
+
     try
     {
         if (argc > 1)
@@ -108,13 +104,12 @@ int main(int argc, char **argv)
         {
             thread_count = std::stoul(argv[2]);
         }
-
         if (thread_count > max_threads)
         {
-            throw std::runtime_error(spdlog::fmt_lib::format("Number of threads exceeds maximum({})", max_threads));
+            throw std::runtime_error(spdlog::fmt_lib::format("Number of threads exceeds maximum [{}]", max_threads));
         }
 
-        // bench_spdlog(iterations, thread_count);
+        bench_spdlog(iterations, thread_count);
         bench_zlog(iterations, thread_count);
     }
     catch (const std::exception &e)
