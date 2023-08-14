@@ -46,4 +46,4 @@ jobs:
     - name: Run
       run: |
         cd build
-        ./spdlog-vs-zlog
+        ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
