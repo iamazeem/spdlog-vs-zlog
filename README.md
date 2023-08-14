@@ -6,6 +6,7 @@ spdlog vs zlog benchmarks
 
 - [spdlog 1.12.0](https://github.com/gabime/spdlog/releases/tag/v1.12.0)
 - [zlog 1.2.16](https://github.com/HardySimpson/zlog/releases/tag/1.2.16)
+- [WinZlog](https://github.com/lopsd07/WinZlog/commit/03a95719e4782d83bc6787da3247989034079d1f)
 
 ## Default Parameters
 
@@ -35,7 +36,8 @@ cd ..
 ## Build
 
 ```shell
-mkdir build && cd build
+mkdir build
+cd build
 cmake ..
 make
 ```
