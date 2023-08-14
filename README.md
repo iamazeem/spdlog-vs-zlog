@@ -1,5 +1,7 @@
 # spdlog-vs-zlog
 
+[![ci](https://github.com/iamazeem/spdlog-vs-zlog/actions/workflows/ci.yml/badge.svg)](https://github.com/iamazeem/spdlog-vs-zlog/actions/workflows/ci.yml)
+
 spdlog vs zlog benchmarks
 
 - [spdlog 1.12.0](https://github.com/gabime/spdlog/releases/tag/v1.12.0)
