@@ -69,7 +69,6 @@ int main(int argc, char **argv)
 
         auto rotating_mt = spdlog::rotating_logger_mt("rotating_mt", "logs/rotating_mt.log", file_size, rotating_files);
         rotating_mt->set_pattern("%Y-%m-%d %T.%o %l [%P:%t] %v");
-        rotating_mt->flush_on(spdlog::level::info);
         bench_mt(std::move(rotating_mt), iterations, thread_count);
     }
     catch (const std::exception &e)
