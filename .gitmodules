@@ -4,6 +4,3 @@
 [submodule "zlog"]
 	path = zlog
 	url = https://github.com/HardySimpson/zlog
-[submodule "WinZlog"]
-	path = WinZlog
-	url = git@github.com:lopsd07/WinZlog.git
