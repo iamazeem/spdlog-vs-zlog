@@ -11,7 +11,11 @@ Tested on Linux and macOS runners via CI. See the most recent run under
 [Actions](https://github.com/iamazeem/spdlog-vs-zlog/actions) tab for the latest
 results.
 
-## Default Parameters
+## Scenario
+
+Comparing `spdlog` and `zlog` in multithreaded context with file rotation.
+
+### Default Parameters
 
 - Threads: 10
 - Iterations: 1,000,000 (100,000 per thread)
