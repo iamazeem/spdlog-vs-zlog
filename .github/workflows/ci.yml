@@ -3,12 +3,10 @@ name: ci
 on:
   push:
     branches: [main]
-    paths-ignore:
-    - '**.md'
+    paths-ignore: ['**.md']
   pull_request:
     branches: [main]
-    paths-ignore:
-    - '**.md'
+    paths-ignore: ['**.md']
   workflow_dispatch:
 
 jobs:
@@ -47,15 +45,17 @@ jobs:
         ls -lh
         make
 
+    - name: Copy WinZlog DLLs on Windows
+      if: ${{ runner.os == 'Windows' }}
+      run: |
+        cp -f WinZlog/Release/bin/*.dll ./build/
+
     - name: Run
       run: |
-        if [[ ${{ runner.os }} == 'Windows' ]]; then
-          cp WinZlog/Release/bin/*.dll ./build/
-        fi
         cd build
         echo '```shell' >> "$GITHUB_STEP_SUMMARY"
         for i in {1..5}; do
-          echo "Run # $i" >> "$GITHUB_STEP_SUMMARY"
+          echo "Run $i" >> "$GITHUB_STEP_SUMMARY"
           ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"
         done
