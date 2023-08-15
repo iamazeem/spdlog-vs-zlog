@@ -18,15 +18,18 @@ if (WIN32)
         ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
         ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/head
     )
-    target_link_libraries(${PROJECT_NAME}
+    target_link_libraries(
+        ${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/lib/x64/zlog.lib
+        -pthread
     )
 else()
     include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
         ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/include
     )
-    target_link_libraries(${PROJECT_NAME}
+    target_link_libraries(
+        ${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/lib/libzlog.a
         -pthread
     )
