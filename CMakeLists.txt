@@ -19,7 +19,7 @@ if (WIN32)
         ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/head
     )
     target_link_libraries(${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/lib/zlog.lib
+        ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/lib/x64/zlog.lib
     )
 else()
     include_directories(

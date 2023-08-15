@@ -48,7 +48,7 @@ jobs:
     - name: Copy WinZlog DLLs on Windows
       if: ${{ runner.os == 'Windows' }}
       run: |
-        cp -f WinZlog/Release/bin/*.dll ./build/
+        cp -f WinZlog/Release/bin/x64/*.dll ./build/
 
     - name: Run
       run: |
