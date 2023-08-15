@@ -6,7 +6,10 @@ spdlog vs zlog benchmarks
 
 - [spdlog 1.12.0](https://github.com/gabime/spdlog/releases/tag/v1.12.0)
 - [zlog 1.2.16](https://github.com/HardySimpson/zlog/releases/tag/1.2.16)
-- [WinZlog](https://github.com/lopsd07/WinZlog/commit/03a95719e4782d83bc6787da3247989034079d1f)
+
+Tested on Linux and macOS runners via CI. See the most recent run under
+[Actions](https://github.com/iamazeem/spdlog-vs-zlog/actions) tab for the latest
+results.
 
 ## Default Parameters
 
@@ -49,10 +52,6 @@ $ ./spdlog-vs-zlog
 [2023-08-15 09:51:57.568] [info] spdlog, elapsed:   0.12 secs, logs/sec:    817,639/sec
 [2023-08-15 09:51:57.779] [info]   zlog, elapsed:   0.21 secs, logs/sec:    473,812/sec
 ```
-
-See the most recent run under
-[Actions](https://github.com/iamazeem/spdlog-vs-zlog/actions) tab for the latest
-results via CI.
 
 ## License
 

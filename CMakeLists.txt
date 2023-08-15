@@ -11,23 +11,14 @@ set(SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
 
+include_directories(
+    ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/include
+)
+
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-if (WIN32)
-    include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/head
-    )
-    target_link_libraries(${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/WinZlog/Release/lib/zlog.lib
-    )
-else()
-    include_directories(
-        ${CMAKE_CURRENT_SOURCE_DIR}/spdlog/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/include
-    )
-    target_link_libraries(${PROJECT_NAME}
-        ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/lib/libzlog.a
-        -pthread
-    )
-endif (WIN32)
+target_link_libraries(${PROJECT_NAME}
+    ${CMAKE_CURRENT_SOURCE_DIR}/zlog/build/lib/libzlog.a
+    -pthread
+)
