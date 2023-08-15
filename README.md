@@ -50,6 +50,10 @@ $ ./spdlog-vs-zlog
 [2023-08-15 09:51:57.779] [info]   zlog, elapsed:   0.21 secs, logs/sec:    473,812/sec
 ```
 
+See the most recent run under
+[Actions](https://github.com/iamazeem/spdlog-vs-zlog/actions) tab for the latest
+results via CI.
+
 ## License
 
 [MIT](LICENSE)
