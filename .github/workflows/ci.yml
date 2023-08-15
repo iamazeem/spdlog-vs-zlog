@@ -13,8 +13,8 @@ jobs:
   ci:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
-        # os: [windows-latest]
+        # os: [ubuntu-latest, macos-latest]
+        os: [windows-latest]
 
     runs-on: ${{ matrix.os }}
 
