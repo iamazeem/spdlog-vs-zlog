@@ -20,12 +20,12 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
     threads.reserve(thread_count);
 
     const auto start = std::chrono::high_resolution_clock::now();
-    for (size_t t = 0; t < thread_count; ++t)
+    for (std::size_t t = 0; t < thread_count; ++t)
     {
         threads.emplace_back(
             [&]()
             {
-                for (std::size_t i = 1; i <= (iterations / thread_count); i++)
+                for (std::size_t i = 1; i <= iterations; i++)
                 {
                     logger->info("message number # {}", i);
                 }
@@ -59,12 +59,12 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     threads.reserve(thread_count);
 
     const auto start = std::chrono::high_resolution_clock::now();
-    for (size_t t = 0; t < thread_count; ++t)
+    for (std::size_t t = 0; t < thread_count; ++t)
     {
         threads.emplace_back(
             [&]()
             {
-                for (std::size_t i = 1; i <= (iterations / thread_count); i++)
+                for (std::size_t i = 1; i <= iterations; i++)
                 {
                     dzlog_info("message number # %zu", i);
                 }
@@ -91,7 +91,7 @@ int main(int argc, char **argv)
     spdlog::set_automatic_registration(false);
     spdlog::default_logger()->set_pattern("%+");
 
-    std::size_t iterations = 1'000'000;
+    std::size_t iterations = 100'000;
     std::size_t thread_count = 10;
 
     try
