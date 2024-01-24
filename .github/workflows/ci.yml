@@ -28,7 +28,7 @@ jobs:
         ref: main
         submodules: true
 
-    - name: Build zlog submodule for Linux and macOS
+    - name: Build zlog submodule
       run: |
         cd zlog
         make PREFIX=$PWD/build
@@ -37,17 +37,15 @@ jobs:
 
     - name: Build [${{ github.repository }}]
       run: |
-        mkdir build
-        cd build
-        cmake ..
-        ls -lh
-        make
+        cmake -S . -B build
+        cmake --build build
+        ls -lh build
 
     - name: Run
       run: |
         cd build
         echo '```shell' >> "$GITHUB_STEP_SUMMARY"
-        for i in {1..5}; do
+        for i in {1..3}; do
           echo "Run $i" >> "$GITHUB_STEP_SUMMARY"
           ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"

@@ -7,9 +7,9 @@
 
 #include "zlog.h"
 
-static constexpr std::size_t max_file_size = 30 * 1024 * 1024;
+static constexpr std::size_t max_file_size = 10 * 1024 * 1024;
 static constexpr std::size_t max_rotating_files = 5;
-static constexpr std::size_t max_threads = 1000;
+static constexpr std::size_t max_threads = 100;
 
 void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) noexcept
 {

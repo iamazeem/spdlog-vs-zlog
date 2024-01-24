@@ -19,7 +19,7 @@ Comparing `spdlog` and `zlog` in multithreaded context with file rotation.
 
 - Threads: 10
 - Iterations: 1,000,000 (100,000 per thread)
-- Rotation: 30 MB (5 files)
+- Rotation: 10 MB (5 files)
 - Optimization Level: `O3`
 
 ## Setup
@@ -43,10 +43,8 @@ cd ..
 ## Build
 
 ```shell
-mkdir build
-cd build
-cmake ..
-make
+cmake -S . -B build
+cmake --build build
 ```
 
 ## Run
