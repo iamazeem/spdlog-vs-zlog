@@ -50,6 +50,7 @@ cmake --build build
 ## Run
 
 ```shell
+$ cd build
 $ ./spdlog-vs-zlog 
 [2023-08-15 09:51:57.568] [info] spdlog, elapsed:   0.12 secs, logs/sec:    817,639/sec
 [2023-08-15 09:51:57.779] [info]   zlog, elapsed:   0.21 secs, logs/sec:    473,812/sec
