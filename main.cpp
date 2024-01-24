@@ -3,9 +3,6 @@
 #include <vector>
 #include <cstdlib>
 
-#include <filesystem>
-namespace fs = std::filesystem;
-
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/rotating_file_sink.h"
 

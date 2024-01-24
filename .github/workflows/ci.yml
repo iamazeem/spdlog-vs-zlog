@@ -28,7 +28,7 @@ jobs:
         ref: main
         submodules: true
 
-    - name: Build zlog submodule
+    - name: Build zlog
       run: |
         cd zlog
         make PREFIX=$PWD/build
@@ -50,9 +50,10 @@ jobs:
             echo "Run $i"
             ./spdlog-vs-zlog
             echo
-            ls -Ggl /tmp/{spdlog,zlog}*
-            wc -l /tmp/{spdlog,zlog}*
-            rm -f /tmp/{spdlog,zlog}*
+            wc /tmp/spdlog*
+            wc /tmp/zlog*
+            rm /tmp/{spdlog,zlog}*
+            echo
           done
         } | tee -a "$GITHUB_STEP_SUMMARY"
         echo '```' >> "$GITHUB_STEP_SUMMARY"
