@@ -42,9 +42,9 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
     const auto end = std::chrono::high_resolution_clock::now() - start;
     const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
 
-    spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-        "spdlog, threads: {}, iterations: {}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
-        thread_count, iterations, elapsed, int(iterations / elapsed)));
+    spdlog::info(
+        "spdlog, threads: {:L}, iterations: {:L}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+        thread_count, iterations, elapsed, long(iterations / elapsed));
 
     spdlog::drop(logger->name());
 }
@@ -83,15 +83,17 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     const auto end = std::chrono::high_resolution_clock::now() - start;
     const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
 
-    spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-        "spdlog, threads: {}, iterations: {}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
-        thread_count, iterations, elapsed, int(iterations / elapsed)));
+    spdlog::info(
+        "spdlog, threads: {:L}, iterations: {:L}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+        thread_count, iterations, elapsed, long(iterations / elapsed));
 
     zlog_fini();
 }
 
 int main(int argc, char **argv)
 {
+    std::locale::global(std::locale("es_US.UTF-8"));
+
     spdlog::set_automatic_registration(false);
     spdlog::default_logger()->set_pattern("%+");
 
