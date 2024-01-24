@@ -17,10 +17,7 @@ static constexpr std::size_t max_threads = 100;
 
 void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) noexcept
 {
-    const auto filepath = "/tmp/spdlog";
-    fs::remove(filepath);
-
-    auto logger = spdlog::rotating_logger_mt("rotating_mt", filepath, max_file_size, max_rotating_files);
+    auto logger = spdlog::rotating_logger_mt("rotating_mt", "/tmp/spdlog", max_file_size, max_rotating_files);
     logger->set_pattern("%Y-%m-%d %T.%e %l [%P:%t] %v");
 
     std::vector<std::thread> threads;
@@ -57,9 +54,6 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
 
 void bench_zlog(const std::size_t iterations, const std::size_t thread_count) noexcept
 {
-    const auto filepath = "/tmp/zlog";
-    fs::remove(filepath);
-
     constexpr auto config_file_path = "../zlog.conf";
     if (dzlog_init(config_file_path, "default_category"))
     {
