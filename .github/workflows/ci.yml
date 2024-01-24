@@ -52,8 +52,8 @@ jobs:
             echo
             # wc /tmp/spdlog*
             # wc /tmp/zlog*
+            # echo
             rm /tmp/{spdlog,zlog}*
-            echo
           done
         } | tee -a "$GITHUB_STEP_SUMMARY"
         echo '```' >> "$GITHUB_STEP_SUMMARY"
