@@ -50,8 +50,8 @@ jobs:
             echo "Run $i"
             ./spdlog-vs-zlog
             echo
-            wc /tmp/spdlog*
-            wc /tmp/zlog*
+            # wc /tmp/spdlog*
+            # wc /tmp/zlog*
             rm /tmp/{spdlog,zlog}*
             echo
           done
