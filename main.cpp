@@ -2,6 +2,7 @@
 #include <thread>
 #include <vector>
 #include <cstdlib>
+#include <locale>
 
 #include "spdlog/spdlog.h"
 #include "spdlog/sinks/rotating_file_sink.h"
