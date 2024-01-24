@@ -49,5 +49,7 @@ jobs:
           echo "Run $i" >> "$GITHUB_STEP_SUMMARY"
           ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"
+          ls -Ggl /tmp/{spdlog,zlog}
+          wc -l /tmp/{spdlog,zlog}
         done
         echo '```' >> "$GITHUB_STEP_SUMMARY"
