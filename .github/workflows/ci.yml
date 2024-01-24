@@ -45,7 +45,7 @@ jobs:
       run: |
         cd build
         echo '```shell' >> "$GITHUB_STEP_SUMMARY"
-        for i in {1..3}; do
+        for i in {1..5}; do
           echo "Run $i" >> "$GITHUB_STEP_SUMMARY"
           ./spdlog-vs-zlog | tee -a "$GITHUB_STEP_SUMMARY"
           echo >> "$GITHUB_STEP_SUMMARY"
