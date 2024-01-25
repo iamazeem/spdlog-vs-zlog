@@ -52,8 +52,9 @@ cmake --build build
 ```shell
 $ cd build
 $ ./spdlog-vs-zlog
-[2024-01-25 10:58:17.396] [info] spdlog, threads: 10, iterations: 100,000, elapsed:   0.82 secs, logs/sec:    122,381/sec
-[2024-01-25 10:58:19.411] [info]   zlog, threads: 10, iterations: 100,000, elapsed:   2.02 secs, logs/sec:     49,619/sec
+[2024-01-25 11:05:39.364] [info] threads: 10, iterations: 100,000 per thread
+[2024-01-25 11:05:40.185] [info] spdlog, elapsed time:   0.82 secs, logs/sec:    121,856/sec
+[2024-01-25 11:05:42.300] [info]   zlog, elapsed time:   2.11 secs, logs/sec:     47,292/sec
 ```
 
 ## License

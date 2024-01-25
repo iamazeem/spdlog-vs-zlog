@@ -37,14 +37,14 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
     for (auto &t : threads)
     {
         t.join();
-    };
+    }
 
     const auto end = std::chrono::high_resolution_clock::now() - start;
     const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-        "spdlog, threads: {:L}, iterations: {:L}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
-        thread_count, iterations, elapsed, int(iterations / elapsed)));
+                                         "spdlog, elapsed time: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+                                         elapsed, int(iterations / elapsed)));
 
     spdlog::drop(logger->name());
 }
@@ -78,14 +78,14 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     for (auto &t : threads)
     {
         t.join();
-    };
+    }
 
     const auto end = std::chrono::high_resolution_clock::now() - start;
     const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-        "  zlog, threads: {:L}, iterations: {:L}, elapsed: {:>6.2f} secs, logs/sec: {:>10L}/sec",
-        thread_count, iterations, elapsed, int(iterations / elapsed)));
+                                         "  zlog, elapsed time: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+                                         elapsed, int(iterations / elapsed)));
 
     zlog_fini();
 }
@@ -112,6 +112,9 @@ int main(int argc, char **argv)
         {
             throw std::runtime_error(spdlog::fmt_lib::format("number of threads exceeds maximum [{}]", max_threads));
         }
+
+        spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
+                                             "threads: {:L}, iterations: {:L} per thread", thread_count, iterations));
 
         bench_spdlog(iterations, thread_count);
         bench_zlog(iterations, thread_count);
