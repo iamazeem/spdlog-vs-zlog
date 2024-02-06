@@ -25,7 +25,6 @@ jobs:
     - name: Checkout [${{ github.repository }}]
       uses: actions/checkout@v4
       with:
-        ref: main
         submodules: true
 
     - name: Build zlog
