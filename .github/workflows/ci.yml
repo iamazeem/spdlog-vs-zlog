@@ -23,9 +23,8 @@ jobs:
 
     steps:
     - name: Checkout [${{ github.repository }}]
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
-        ref: main
         submodules: true
 
     - name: Build zlog
@@ -53,7 +52,7 @@ jobs:
             # wc /tmp/spdlog*
             # wc /tmp/zlog*
             # echo
-            rm /tmp/{spdlog,zlog}*
+            rm /tmp/{spdlog,zlog,dzlog}*
           done
         } | tee -a "$GITHUB_STEP_SUMMARY"
         echo '```' >> "$GITHUB_STEP_SUMMARY"

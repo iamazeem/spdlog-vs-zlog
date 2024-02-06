@@ -22,7 +22,7 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
 
     const auto start = std::chrono::high_resolution_clock::now();
 
-    for (std::size_t t = 0; t < thread_count; ++t)
+    for (std::size_t t = 0; t < thread_count; t++)
     {
         threads.emplace_back(
             [&]()
@@ -51,8 +51,54 @@ void bench_spdlog(const std::size_t iterations, const std::size_t thread_count) 
 
 void bench_zlog(const std::size_t iterations, const std::size_t thread_count) noexcept
 {
-    constexpr auto config_file_path = "../zlog.conf";
-    if (dzlog_init(config_file_path, "default_category"))
+    if (zlog_init("../zlog.conf"))
+    {
+        spdlog::error("zlog_init() failed");
+        return;
+    }
+
+    const auto zc = zlog_get_category("default_category");
+    if (!zc)
+    {
+        spdlog::error("zlog_get_category() failed");
+        return;
+    }
+
+    std::vector<std::thread> threads;
+    threads.reserve(thread_count);
+
+    const auto start = std::chrono::high_resolution_clock::now();
+
+    for (std::size_t t = 0; t < thread_count; t++)
+    {
+        threads.emplace_back(
+            [&]()
+            {
+                for (std::size_t i = 1; i <= iterations; i++)
+                {
+                    zlog_info(zc, "message number # %zu", i);
+                }
+            });
+    }
+
+    for (auto &t : threads)
+    {
+        t.join();
+    }
+
+    const auto end = std::chrono::high_resolution_clock::now() - start;
+    const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
+
+    spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
+                                         "  zlog, elapsed time: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+                                         elapsed, int(iterations / elapsed)));
+
+    zlog_fini();
+}
+
+void bench_dzlog(const std::size_t iterations, const std::size_t thread_count) noexcept
+{
+    if (dzlog_init("../dzlog.conf", "default_category"))
     {
         spdlog::error("dzlog_init() failed");
         return;
@@ -63,7 +109,7 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
 
     const auto start = std::chrono::high_resolution_clock::now();
 
-    for (std::size_t t = 0; t < thread_count; ++t)
+    for (std::size_t t = 0; t < thread_count; t++)
     {
         threads.emplace_back(
             [&]()
@@ -84,7 +130,7 @@ void bench_zlog(const std::size_t iterations, const std::size_t thread_count) no
     const auto elapsed = std::chrono::duration_cast<std::chrono::duration<double>>(end).count();
 
     spdlog::info(spdlog::fmt_lib::format(std::locale("en_US.UTF-8"),
-                                         "  zlog, elapsed time: {:>6.2f} secs, logs/sec: {:>10L}/sec",
+                                         " dzlog, elapsed time: {:>6.2f} secs, logs/sec: {:>10L}/sec",
                                          elapsed, int(iterations / elapsed)));
 
     zlog_fini();
@@ -118,6 +164,7 @@ int main(int argc, char **argv)
 
         bench_spdlog(iterations, thread_count);
         bench_zlog(iterations, thread_count);
+        bench_dzlog(iterations, thread_count);
     }
     catch (const std::exception &e)
     {
