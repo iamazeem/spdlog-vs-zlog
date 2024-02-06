@@ -47,6 +47,15 @@ cmake -S . -B build
 cmake --build build
 ```
 
+or,
+
+```shell
+mkdir build
+cd build
+cmake ..
+make
+```
+
 ## Run
 
 ```shell
