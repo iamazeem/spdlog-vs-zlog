@@ -27,7 +27,7 @@ Comparing `spdlog` and `zlog` in multithreaded context with file rotation.
 Clone:
 
 ```shell
-git clone --recursive git@github.com:iamazeem/spdlog-vs-zlog.git
+git clone --recursive https://github.com/iamazeem/spdlog-vs-zlog.git
 cd spdlog-vs-zlog
 ```
 
