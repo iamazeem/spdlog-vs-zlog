@@ -4,7 +4,7 @@
 
 spdlog vs zlog benchmarks
 
-- [spdlog 1.12.0](https://github.com/gabime/spdlog/releases/tag/v1.12.0)
+- [spdlog 1.13.0](https://github.com/gabime/spdlog/releases/tag/v1.13.0)
 - [zlog 1.2.16](https://github.com/HardySimpson/zlog/releases/tag/1.2.16)
   - Both [`zlog_*`](https://hardysimpson.github.io/zlog/UsersGuide-EN.html#htoc28)
     and [`dzlog_*`](https://hardysimpson.github.io/zlog/UsersGuide-EN.html#htoc33)
